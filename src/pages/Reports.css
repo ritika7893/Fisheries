@@ -1,0 +1,43 @@
+.reports-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+.reports-grid .panel {
+  padding: 21px;
+}
+.insight-banner {
+  margin-top: 17px;
+  border: 1px solid #dcefeb;
+  background: #eff9f7;
+  border-radius: 13px;
+  padding: 17px;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: #15998a;
+}
+.insight-banner > svg {
+  width: 34px;
+  height: 34px;
+  padding: 8px;
+  background: #d9f1eb;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+.insight-banner b {
+  font: 800 12px Manrope;
+  color: #28545b;
+}
+.insight-banner p {
+  font-size: 10px;
+  color: #769195;
+  margin: 4px 0 0;
+  line-height: 1.6;
+}
+@media (max-width: 850px) {
+  .reports-grid {
+    grid-template-columns: 1fr;
+  }
+}

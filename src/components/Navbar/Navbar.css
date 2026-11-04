@@ -1,0 +1,103 @@
+.site-nav {
+  height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 max(5.5vw, 24px);
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  border-bottom: 1px solid #eaf0f1;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: #113d49;
+  font: 800 20px Manrope;
+  letter-spacing: -0.7px;
+}
+.brand > span:last-child > span {
+  color: #0fa58f;
+}
+.brand small {
+  display: block;
+  font: 700 8px "DM Sans";
+  letter-spacing: 1.6px;
+  color: #779198;
+  margin-top: 1px;
+}
+.brand-mark {
+  width: 42px;
+  height: 42px;
+  background: #e4f8f4;
+  color: #0d9d8b;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+}
+.site-nav nav {
+  display: flex;
+  gap: 26px;
+}
+.site-nav nav a {
+  text-decoration: none;
+  color: #506970;
+  font-size: 12px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+.site-nav nav a:hover {
+  color: #0a9b8b;
+}
+.nav-actions {
+  display: flex;
+  gap: 10px;
+}
+.nav-actions button {
+  border: 0;
+  padding: 11px 17px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.nav-login {
+  background: white;
+  color: #244b55;
+}
+.nav-register {
+  background: #087f7a;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.mobile-menu {
+  display: none;
+  background: none;
+  border: 0;
+  color: #173f4a;
+}
+@media (max-width: 1050px) {
+  .site-nav nav {
+    gap: 13px;
+  }
+  .site-nav nav a {
+    font-size: 11px;
+  }
+}
+@media (max-width: 820px) {
+  .site-nav {
+    height: 70px;
+  }
+  .site-nav nav,
+  .nav-actions {
+    display: none;
+  }
+  .mobile-menu {
+    display: block;
+  }
+}

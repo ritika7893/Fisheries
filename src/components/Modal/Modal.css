@@ -1,0 +1,40 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: #082e3bb8;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  backdrop-filter: blur(4px);
+}
+.modal-panel {
+  background: white;
+  border-radius: 20px;
+  padding: 25px;
+  width: min(560px, 100%);
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 25px 80px #001e2a55;
+}
+.modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.modal-head h3 {
+  font: 800 19px Manrope;
+  color: #143d49;
+  margin: 0;
+}
+.icon-btn {
+  border: 0;
+  background: #eff5f6;
+  border-radius: 9px;
+  padding: 8px;
+  display: grid;
+  place-items: center;
+  color: #47636b;
+  cursor: pointer;
+}

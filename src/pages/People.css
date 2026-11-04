@@ -1,0 +1,134 @@
+.people-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.people-stats > div {
+  background: white;
+  border: 1px solid #e8eff0;
+  border-radius: 12px;
+  padding: 15px;
+  display: grid;
+  grid-template-columns: 35px 1fr;
+  align-items: center;
+  column-gap: 10px;
+}
+.people-stats svg {
+  grid-row: span 2;
+  color: #15998b;
+  background: #e8f7f4;
+  border-radius: 9px;
+  padding: 9px;
+  width: 35px;
+  height: 35px;
+  box-sizing: border-box;
+}
+.people-stats b {
+  font: 800 20px Manrope;
+  color: #214b55;
+}
+.people-stats span {
+  font-size: 9px;
+  color: #8ca1a4;
+}
+.people-toolbar {
+  margin-bottom: 15px;
+}
+.people-toolbar .search-field {
+  width: 330px;
+}
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 13px;
+}
+.person-card {
+  background: white;
+  border: 1px solid #e7eff0;
+  border-radius: 13px;
+  padding: 17px;
+}
+.person-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.person-avatar {
+  width: 42px;
+  height: 42px;
+  background: #e5f5f1;
+  color: #0b9183;
+  border-radius: 13px;
+  display: grid;
+  place-items: center;
+  font: 800 17px Manrope;
+}
+.verified {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #178d70;
+  font-size: 8px;
+  background: #e8f7f1;
+  padding: 6px 8px;
+  border-radius: 20px;
+}
+.person-card h3 {
+  font: 800 13px Manrope;
+  color: #254d56;
+  margin: 15px 0 4px;
+}
+.person-role {
+  font-size: 9px;
+  color: #0d9487;
+  font-weight: 700;
+}
+.person-contact {
+  display: grid;
+  gap: 9px;
+  margin: 17px 0;
+  color: #82979b;
+  font-size: 9px;
+}
+.person-contact span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.person-foot {
+  border-top: 1px solid #edf1f1;
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  color: #9aacaf;
+}
+.person-foot b {
+  color: #168c6c;
+}
+@media (max-width: 900px) {
+  .people-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 550px) {
+  .people-grid {
+    grid-template-columns: 1fr;
+  }
+  .people-toolbar .search-field {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .people-stats > div {
+    padding: 10px;
+    grid-template-columns: 27px 1fr;
+  }
+  .people-stats svg {
+    width: 27px;
+    height: 27px;
+  }
+  .people-stats b {
+    font-size: 16px;
+  }
+}
