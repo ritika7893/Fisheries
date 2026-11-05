@@ -63,8 +63,9 @@
 .hero-copy > p {
   font-size: 14px;
   line-height: 1.8;
-  color: #648087;
+  color: #000000;
   max-width: 475px;
+  font-weight: 500;
 }
 .hero-actions {
   display: flex;
@@ -138,7 +139,7 @@
   color: #355a63;
 }
 .hero-proof small {
-  color: #8ba2a4;
+  color: #000000;
   margin-top: 4px;
 }
 .hero-visual {
@@ -267,7 +268,7 @@
   right: 8vw;
   display: flex;
   justify-content: space-between;
-  color: #8ba5a6;
+  color: #000;
   font-size: 8px;
   letter-spacing: 1px;
   font-weight: 800;
@@ -308,7 +309,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #628087;
+  color: #000000;
   font-size: 9px;
   letter-spacing: 1px;
 }
@@ -536,7 +537,9 @@
     font-size: 49px;
     letter-spacing: -2.5px;
   }
-  .hero-visual {
+.hero-visual {
+  position: relative;
+  z-index: 1;
     max-width: 390px;
     width: 100%;
     margin: auto;
@@ -925,7 +928,7 @@
 }
 .freshness-points small {
   font-size: 10px;
-  color: #8ba0a2;
+  color: #000;
   margin-top: 3px;
 }
 .freshness-visual {
@@ -1134,4 +1137,193 @@
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+.hero-bg-carousel {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.hero-bg-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+  transform: scale(1.05);
+}
+.hero-bg-slide.is-active {
+  opacity: 1;
+}
+.hero-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, rgba(243,251,249,0.88) 0%, rgba(237,248,246,0.82) 52%, rgba(224,243,240,0.78) 100%);
+}
+.hero-bg-dots {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 2;
+}
+.hero-bg-dots button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(20,165,141,0.35);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s, transform 0.3s;
+}
+.hero-bg-dots button.is-active {
+  background: #14a58d;
+  transform: scale(1.25);
+}
+
+.hero-bg-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.75);
+  color: #14a58d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+  transition: background 0.2s, transform 0.2s;
+}
+.hero-bg-nav:hover {
+  background: #fff;
+  transform: translateY(-50%) scale(1.08);
+}
+.hero-bg-prev {
+  left: 18px;
+}
+.hero-bg-next {
+  right: 18px;
+}
+
+.intro-section {
+  position: relative;
+}
+.intro-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.82);
+  z-index: 0;
+  pointer-events: none;
+}
+.intro-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.benefit-grid article,
+.fish-card {
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(20,165,141,0.12);
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.fish-showcase {
+  position: relative;
+}
+.fish-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.85);
+  z-index: 0;
+  pointer-events: none;
+}
+.fish-showcase > .section {
+  position: relative;
+  z-index: 1;
+}
+
+.workflow-section {
+  position: relative;
+}
+.workflow-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.85);
+  z-index: 0;
+  pointer-events: none;
+}
+.workflow-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.steps-grid article,
+.workflow-layout article {
+  background: #ffffff;
+  box-shadow: 0 8px 24px rgba(20,165,141,0.12);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.intro-section p,
+.fish-showcase p,
+.workflow-section p,
+.freshness-section p {
+  color: #1f2937;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.9);
+}
+
+.freshness-section {
+  position: relative;
+}
+.freshness-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.85);
+  z-index: 0;
+  pointer-events: none;
+}
+.freshness-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+.marketplace-band {
+  position: relative;
+}
+.marketplace-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.85);
+  z-index: 0;
+  pointer-events: none;
+}
+.marketplace-band > * {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-band {
+  position: relative;
+}
+
+.cta-band > * {
+  position: relative;
+  z-index: 1;
 }

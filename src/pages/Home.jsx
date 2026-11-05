@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
   CheckCircle2,
   Truck,
   ShieldCheck,
@@ -91,7 +93,21 @@ const steps = [
   ],
 ];
 
+const heroSlides = [
+  "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&w=1600&q=90",
+  "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format&fit=crop&w=1600&q=90",
+  "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=1600&q=90",
+  "https://images.unsplash.com/photo-1574781330855-d0db8cc6a79c?auto=format&fit=crop&w=1600&q=90",
+];
+
 export default function Home({ onLogin, onRegister }) {
+  const [activeSlide, setActiveSlide] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 2000);
+    return () => clearInterval(id);
+  }, []);
   useEffect(() => {
     const nodes = document.querySelectorAll(".reveal");
     if (!("IntersectionObserver" in window)) {
@@ -118,8 +134,42 @@ export default function Home({ onLogin, onRegister }) {
     
 
       <section className="hero" id="home">
-        <div className="hero-copy reveal">
-          <div className="eyebrow">
+        <div className="hero-bg-carousel" aria-hidden="true">
+          {heroSlides.map((src, i) => (
+            <div
+              key={src}
+              className={`hero-bg-slide ${i === activeSlide ? "is-active" : ""}`}
+              style={{ backgroundImage: `url(${src})` }}
+            />
+          ))}
+          <div className="hero-bg-overlay" />
+        </div>
+        <div className="hero-bg-dots">
+          {heroSlides.map((_, i) => (
+            <button
+              key={i}
+              className={i === activeSlide ? "is-active" : ""}
+              onClick={() => setActiveSlide(i)}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+        {/* <button
+          className="hero-bg-nav hero-bg-prev"
+          onClick={() => setActiveSlide((p) => (p - 1 + heroSlides.length) % heroSlides.length)}
+          aria-label="Previous slide"
+        >
+          <ChevronLeft size={22} />
+        </button> */}
+        {/* <button
+          className="hero-bg-nav hero-bg-next"
+          onClick={() => setActiveSlide((p) => (p + 1) % heroSlides.length)}
+          aria-label="Next slide"
+        >
+          <ChevronRight size={22} />
+        </button> */}
+          <div className="hero-copy reveal">
+            <div className="eyebrow">
             <span /> THE CONNECTED FISHERIES MARKETPLACE
           </div>
           <h1>
@@ -215,7 +265,7 @@ export default function Home({ onLogin, onRegister }) {
         </strong>
       </section>
 
-      <section className="section intro-section" id="about">
+      <section className="section intro-section" id="about" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=1600&q=85)", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="section-kicker">A BETTER WAY TO TRADE</div>
         <div className="intro-grid reveal">
           <h2>
@@ -279,7 +329,7 @@ export default function Home({ onLogin, onRegister }) {
         </div>
       </section>
 
-      <section className="fish-showcase" id="categories">
+      <section className="fish-showcase" id="categories" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1574781330855-d0db8cc6a79c?auto=format&fit=crop&w=1600&q=85)", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="section">
           <div className="section-kicker">EXPLORE FISH CATEGORIES</div>
           <div className="section-heading">
@@ -328,7 +378,7 @@ export default function Home({ onLogin, onRegister }) {
         </div>
       </section>
 
-      <section className="section workflow-section" id="how">
+      <section className="section workflow-section" id="how" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=1600&q=85)", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="section-kicker">HOW AQUATRADE WORKS</div>
         <div className="section-heading">
           <h2>
@@ -373,7 +423,7 @@ export default function Home({ onLogin, onRegister }) {
         </div>
       </section>
 
-      <section className="freshness-section" id="services">
+      <section className="freshness-section" id="services" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format&fit=crop&w=1600&q=85)", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="freshness-inner">
           <div className="freshness-copy reveal">
             <div className="section-kicker">FRESHNESS IS A PRIORITY</div>
@@ -428,7 +478,7 @@ export default function Home({ onLogin, onRegister }) {
         </div>
       </section>
 
-      <section className="marketplace-band">
+      <section className="marketplace-band" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&w=1600&q=85)", backgroundSize: "cover", backgroundPosition: "center" }}>
         <div className="section marketplace-inner">
           <div className="section-kicker">BUILT FOR EVERY ROLE</div>
           <h2>
@@ -448,7 +498,7 @@ export default function Home({ onLogin, onRegister }) {
         </div>
       </section>
 
-      <section className="cta-band">
+      <section className="cta-band" >
         <div>
           <span>YOUR MARKETPLACE. YOUR MOMENTUM.</span>
           <h2>Make every catch count.</h2>
