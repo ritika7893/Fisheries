@@ -115,7 +115,7 @@ export default function Home({ onLogin, onRegister }) {
 
   return (
     <div className="home-page">
-      <Navbar onLogin={onLogin} onRegister={onRegister} />
+    
 
       <section className="hero" id="home">
         <div className="hero-copy reveal">

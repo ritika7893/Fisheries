@@ -1,22 +1,28 @@
 import React, { useState } from "react";
 import {
-  BrowserRouter,
+  BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
   useNavigate,
+  useLocation,
 } from "react-router-dom";
 import {
   Fish,
   ArrowRight,
   ShieldCheck,
-  UserRound,
-  LockKeyhole,
-  Mail,
-  MapPin,
 } from "lucide-react";
+
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+
+import "./styles/global.css";
+
 import Home from "./pages/Home";
 import DashboardLayout from "./layouts/DashboardLayout";
+import Navbar from "./components/Navbar/Navbar";
+import Modal from "./components/Modal/Modal";
+
 import Overview from "./dashboards/Overview";
 import Listings from "./pages/Listings";
 import Negotiations from "./pages/Negotiations";
@@ -24,10 +30,10 @@ import Deliveries from "./pages/Deliveries";
 import People from "./pages/People";
 import Reports from "./pages/Reports";
 import Payments from "./pages/Payments";
-import Modal from "./components/Modal/Modal";
+
 import { roles } from "./data/seed";
-import "./styles/global.css";
-function AppRoutes() {
+
+function AppContent() {
   const [user, setUser] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("aqua_user"));
@@ -48,11 +54,15 @@ function AppRoutes() {
     contractor: { name: "Riverside Contractors", email: "contractor@demo.com" },
     delivery: { name: "Vikram Rawat", email: "delivery@demo.com" },
   };
-  const [location, setLocation] = useState("Dehradun, Uttarakhand");
+  const [userLocation, setUserLocation] = useState("Dehradun, Uttarakhand");
+
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const isDashboard = pathname.startsWith("/app");
+
   const login = () => {
     const r = roles.find((x) => x.id === role);
-    const u = { name, role, roleLabel: r.label, email, location };
+    const u = { name, role, roleLabel: r?.label, email, location: userLocation };
     setUser(u);
     localStorage.setItem("aqua_user", JSON.stringify(u));
     setDialog("");
@@ -75,13 +85,12 @@ function AppRoutes() {
     setName(demoProfiles.farmer.name);
     setEmail(demoProfiles.farmer.email);
   };
+
   return (
     <>
+      {!isDashboard && <Navbar onLogin={openLogin} onRegister={openRegister} />}
       <Routes>
-        <Route
-          path="/"
-          element={<Home onLogin={openLogin} onRegister={openRegister} />}
-        />
+        <Route path="/" element={<Home onLogin={openLogin} onRegister={openRegister} />} />
         <Route
           path="/app"
           element={
@@ -95,7 +104,7 @@ function AppRoutes() {
                 }}
               />
             ) : (
-              <Navigate to="/" />
+              <Navigate to="/" replace />
             )
           }
         >
@@ -107,19 +116,16 @@ function AppRoutes() {
           <Route path="people" element={<People />} />
           <Route path="reports" element={<Reports />} />
         </Route>
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+
       {dialog && (
         <Modal
-          title={
-            dialog === "login" ? "Welcome back" : "Join the AquaTrade network"
-          }
+          title={dialog === "login" ? "Welcome back" : "Join the AquaTrade network"}
           onClose={() => setDialog("")}
         >
           <div className="auth-intro">
-            <div>
-              <Fish size={22} />
-            </div>
+            <div><Fish size={22} /></div>
             <p>
               {dialog === "login"
                 ? "Choose a demo role and enter the workspace. No password or backend is required."
@@ -148,62 +154,43 @@ function AppRoutes() {
                 }}
               >
                 {roles.map((r) => (
-                  <option value={r.id}>{r.label}</option>
+                  <option key={r.id} value={r.id}>{r.label}</option>
                 ))}
               </select>
             </label>
             <label className="full-field">
-              {dialog === "login"
-                ? "Display name"
-                : "Your name / business name"}
-              <input
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Enter your name"
-              />
+              {dialog === "login" ? "Display name" : "Your name / business name"}
+              <input required value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter your name" />
             </label>
             <label className="full-field">
               Email address
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+              <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
             </label>
             {dialog === "register" && (
               <label className="full-field">
                 Location
-                <input
-                  required
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                />
+                <input required value={userLocation} onChange={(e) => setUserLocation(e.target.value)} />
               </label>
             )}
             <div className="auth-note full-field">
-              <ShieldCheck size={15} /> Demo mode · Your activity is saved in
-              this browser only.
+              <ShieldCheck size={15} /> Demo mode · Your activity is saved in this browser only.
             </div>
             <button className="primary-btn full-field">
-              {dialog === "login" ? "Enter dashboard" : "Create demo account"}{" "}
-              <ArrowRight size={15} />
+              {dialog === "login" ? "Enter dashboard" : "Create demo account"} <ArrowRight size={15} />
             </button>
           </form>
-          <div className="demo-hint">
-            Quick demo: Admin · Inventory Manager · Fish Farmer · Delivery
-            Personnel
-          </div>
         </Modal>
       )}
     </>
   );
 }
-export default function App() {
+
+function App() {
   return (
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
+    <Router basename="/">
+      <AppContent />
+    </Router>
   );
 }
+
+export default App;
