@@ -1,7 +1,8 @@
-import React from "react";
-import { Fish, Menu, ArrowUpRight } from "lucide-react";
+import React, { useState } from "react";
+import { Fish, Menu, ArrowUpRight, X } from "lucide-react";
 import "./Navbar.css";
 export default function Navbar({ onLogin, onRegister }) {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <header className="site-nav">
       <a className="brand" href="#home">
@@ -13,7 +14,7 @@ export default function Navbar({ onLogin, onRegister }) {
           <small>FISHERIES MARKETPLACE</small>
         </span>
       </a>
-      <nav>
+      <nav className={isOpen ? "open" : ""}>
         <a href="#home">Home</a>
         <a href="#about">About Us</a>
         <a href="#how">How It Works</a>
@@ -21,7 +22,7 @@ export default function Navbar({ onLogin, onRegister }) {
         <a href="#services">Our Services</a>
         <a href="#contact">Contact Us</a>
       </nav>
-      <div className="nav-actions">
+      <div className={`nav-actions ${isOpen ? "open" : ""}`}>
         <button className="nav-login" onClick={onLogin}>
           Login
         </button>
@@ -29,8 +30,8 @@ export default function Navbar({ onLogin, onRegister }) {
           Get Started <ArrowUpRight size={15} />
         </button>
       </div>
-      <button className="mobile-menu">
-        <Menu />
+      <button className="mobile-menu" onClick={() => setIsOpen((prev) => !prev)}>
+        {isOpen ? <X size={18} /> : <Menu />}
       </button>
     </header>
   );

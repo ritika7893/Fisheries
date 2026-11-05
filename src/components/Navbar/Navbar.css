@@ -93,7 +93,29 @@
   .site-nav {
     height: 70px;
   }
-  .site-nav nav,
+  .site-nav nav.open,
+  .nav-actions.open {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100vw;
+    background: #fff;
+    border-top: 1px solid #eaf0f1;
+    padding: 20px 0;
+    z-index: 30;
+  }
+  .nav-actions.open {
+    gap: 10px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+  }
+  .site-nav nav {
+    display: none;
+  }
   .nav-actions {
     display: none;
   }
