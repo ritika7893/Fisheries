@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Users, Search, Plus, MapPin, Mail, ShieldCheck } from "lucide-react";
+import { Users, Search, Plus, MapPin, Mail, ShieldCheck, Fish } from "lucide-react";
 import { getUsers } from "../utils/store";
 import Modal from "../components/Modal/Modal";
 import "./People.css";
