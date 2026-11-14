@@ -23,6 +23,7 @@ import Shop from "./pages/Shop";
 import Categories from "./pages/Categories";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import ProductDetails from "./pages/ProductDetails";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Navbar from "./components/Navbar/Navbar";
 import Modal from "./components/Modal/Modal";
@@ -99,6 +100,7 @@ function AppContent() {
         <Route path="/categories" element={<Categories />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/product/:slug" element={<ProductDetails />} />
         <Route
           path="/app"
           element={

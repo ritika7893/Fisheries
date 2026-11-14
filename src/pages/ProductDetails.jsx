@@ -9,7 +9,15 @@ function ProductDetails() {
   if (!product) return <NotFound />;
 
   return (
-    <div className="container-xl detail-page">
+    <div className="detail-page">
+      <div className="page-banner" style={{ backgroundImage: `linear-gradient(90deg,#163d39ed,#163d3960), url("${product.image}")`, backgroundPosition: "center 45%", backgroundSize: "cover" }}>
+        <div className="container-xl">
+          <span className="eyebrow eyebrow-light">{product.species}</span>
+          <h1>{product.name}</h1>
+          <p>{product.origin} · Thoughtfully sourced and carefully handled</p>
+        </div>
+      </div>
+      <div className="container-xl">
       <div className="breadcrumb-line"><Link to="/">Home</Link><i className="bi bi-chevron-right" /><Link to="/shop">Shop</Link><i className="bi bi-chevron-right" /><span>{product.name}</span></div>
       <div className="row g-5 product-detail">
         <div className="col-lg-6"><div className="detail-image-wrap"><img src={product.image} alt={product.name} /><span className="product-badge badge-fresh">{product.badge}</span></div></div>
@@ -26,6 +34,7 @@ function ProductDetails() {
         </div>
       </div>
       <section className="detail-bottom" id="reviews"><span className="eyebrow">THE GOOD-TO-KNOW</span><h2>Freshness you can feel good about.</h2><p>Every catch is handled with care, kept cold from the moment it leaves the coast and delivered in insulated, food-safe packaging. Questions about prep? Our fish-loving team is just a message away.</p></section>
+      </div>
     </div>
   );
 }

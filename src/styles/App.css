@@ -268,7 +268,13 @@
 .empty-state > i { color: #83a18e; font-size: 31px; }
 .empty-state h3 { margin: 13px 0 5px; color: var(--ink); font-family: var(--serif); font-size: 23px; }
 .empty-state p { font-size: 11px; }
+a.product-title{
+    text-decoration: none;
 
+}
+.product-card-link{
+    text-decoration: none;
+}
 /* Basket and checkout */
 .page-intro { margin-bottom: 34px; }
 .page-intro h1 { margin: 0; color: var(--ink); font-family: var(--serif); font-size: clamp(37px,5vw,53px); font-weight: 500; }
