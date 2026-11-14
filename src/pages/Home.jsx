@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 import { categories, products } from "../data/Products.js";
 import ProductGrid from "../components/ProductGrid.jsx";
 import SectionHeading from "../components/SectionHeading.jsx";
+import "../pages/home.css";
 
-import "../styles/App.css";
 const bestSellers = products.slice(0, 4);
 const freshCatch = products.filter((product) => product.fresh).slice(1, 5);
 

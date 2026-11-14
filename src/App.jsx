@@ -26,6 +26,7 @@ import Contact from "./pages/Contact";
 import ProductDetails from "./pages/ProductDetails";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import Modal from "./components/Modal/Modal";
 
 import Overview from "./dashboards/Overview";
@@ -128,6 +129,8 @@ function AppContent() {
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+
+      {!isDashboard && <Footer />}
 
       {dialog && (
         <Modal
