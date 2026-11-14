@@ -1,519 +1,106 @@
-import React, { useEffect, useState } from "react";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  ChevronLeft,
-  ChevronRight,
-  CheckCircle2,
-  Truck,
-  ShieldCheck,
-  TrendingUp,
-  PackageCheck,
-  Fish,
-  Waves,
-  Snowflake,
-  IndianRupee,
-  Clock3,
-  ThermometerSnowflake,
-  Handshake,
-  Droplets,
-  BadgeCheck,
-} from "lucide-react";
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
-import "./Home.css";
+import { Link } from "react-router-dom";
+import { categories, products } from "../data/Products.js";
+import ProductGrid from "../components/ProductGrid.jsx";
+import SectionHeading from "../components/SectionHeading.jsx";
 
-const fishCatalog = [
-  {
-    name: "Rohu",
-    scientific: "Labeo rohita",
-    type: "Freshwater favourite",
-    detail:
-      "A popular Indian major carp, commonly traded for retail and bulk markets.",
-    image:
-      "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&w=900&q=85",
-    tags: ["Farm raised", "Bulk supply"],
-  },
-  {
-    name: "Catla",
-    scientific: "Catla catla",
-    type: "Freshwater carp",
-    detail:
-      "Known for its sizeable profile and demand across regional fish markets.",
-    image:
-      "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format&fit=crop&w=900&q=85",
-    tags: ["Fresh catch", "Wholesale"],
-  },
-  {
-    name: "Common Carp",
-    scientific: "Cyprinus carpio",
-    type: "Cultured freshwater",
-    detail:
-      "A widely cultivated species suited to organised pond and farm supply.",
-    image:
-      "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=900&q=85",
-    tags: ["Aquaculture", "Graded lots"],
-  },
-  {
-    name: "Tilapia",
-    scientific: "Oreochromis spp.",
-    type: "Farm raised",
-    detail:
-      "A versatile aquaculture fish with consistent demand from food businesses.",
-    image:
-      "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&w=900&q=85",
-    tags: ["Farm raised", "Scheduled harvest"],
-  },
-];
+import "../styles/App.css";
+const bestSellers = products.slice(0, 4);
+const freshCatch = products.filter((product) => product.fresh).slice(1, 5);
 
-const steps = [
-  [
-    "01",
-    "Register & get verified",
-    "Farmers, hatcheries, dam farmers and river contractors create a supplier profile with their source and location.",
-    Fish,
-  ],
-  [
-    "02",
-    "Publish a fish lot",
-    "Add species, grade, quantity, expected price, harvest date and freshness duration for every available lot.",
-    PackageCheck,
-  ],
-  [
-    "03",
-    "Review & negotiate",
-    "Inventory managers compare supply, send counteroffers and record each step until both parties agree.",
-    Handshake,
-  ],
-  [
-    "04",
-    "Schedule cold-chain pickup",
-    "Confirm the deal, assign a delivery partner and coordinate pickup, transport and delivery updates.",
-    Truck,
-  ],
-];
-
-const heroSlides = [
-  "https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&w=1600&q=90",
-  "https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format&fit=crop&w=1600&q=90",
-  "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=1600&q=90",
-  "https://images.unsplash.com/photo-1574781330855-d0db8cc6a79c?auto=format&fit=crop&w=1600&q=90",
-];
-
-export default function Home({ onLogin, onRegister }) {
-  const [activeSlide, setActiveSlide] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 2000);
-    return () => clearInterval(id);
-  }, []);
-  useEffect(() => {
-    const nodes = document.querySelectorAll(".reveal");
-    if (!("IntersectionObserver" in window)) {
-      nodes.forEach((node) => node.classList.add("is-visible"));
-      return;
-    }
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -35px 0px" },
-    );
-    nodes.forEach((node) => observer.observe(node));
-    return () => observer.disconnect();
-  }, []);
-
+function Home() {
   return (
-    <div className="home-page">
-    
-
-      <section className="hero" id="home">
-        <div className="hero-bg-carousel" aria-hidden="true">
-          {heroSlides.map((src, i) => (
-            <div
-              key={src}
-              className={`hero-bg-slide ${i === activeSlide ? "is-active" : ""}`}
-              style={{ backgroundImage: `url(${src})` }}
-            />
-          ))}
-          <div className="hero-bg-overlay" />
-        </div>
-        <div className="hero-bg-dots">
-          {heroSlides.map((_, i) => (
-            <button
-              key={i}
-              className={i === activeSlide ? "is-active" : ""}
-              onClick={() => setActiveSlide(i)}
-              aria-label={`Go to slide ${i + 1}`}
-            />
-          ))}
-        </div>
-        {/* <button
-          className="hero-bg-nav hero-bg-prev"
-          onClick={() => setActiveSlide((p) => (p - 1 + heroSlides.length) % heroSlides.length)}
-          aria-label="Previous slide"
-        >
-          <ChevronLeft size={22} />
-        </button> */}
-        {/* <button
-          className="hero-bg-nav hero-bg-next"
-          onClick={() => setActiveSlide((p) => (p + 1) % heroSlides.length)}
-          aria-label="Next slide"
-        >
-          <ChevronRight size={22} />
-        </button> */}
-          <div className="hero-copy reveal">
-            <div className="eyebrow">
-            <span /> THE CONNECTED FISHERIES MARKETPLACE
-          </div>
-          <h1>
-            Fresh from the
-            <br />
-            <em>water.</em> Fair to
-            <br />
-            the people.
-          </h1>
-          <p>
-            AquaTrade brings fish farmers, hatcheries, dam farmers, river
-            contractors and buyers into one transparent supply network — from
-            the first listing to the final delivery.
-          </p>
-          <div className="hero-actions">
-            <button onClick={onRegister}>
-              Join the marketplace <ArrowRight size={17} />
-            </button>
-            <a href="#how">
-              See how it works <span>↗</span>
-            </a>
-          </div>
-          <div className="hero-proof">
-            <div className="proof-avatars">
-              <i>FF</i>
-              <i>HC</i>
-              <i>RC</i>
-              <i>+</i>
+    <>
+      <section className="hero-section">
+        <div className="hero-image" />
+        <div className="container-xl hero-content">
+          <div className="hero-copy">
+            <span className="hero-kicker"><span /> FROM THE COAST, WITH CARE</span>
+            <h1>Good seafood.<br />A better <em>way.</em></h1>
+            <p>Traceable, beautifully fresh catch from the people who know the sea best. Delivered cold, straight to your door.</p>
+            <div className="hero-actions">
+              <Link className="btn btn-coral" to="/shop">Shop today’s catch <i className="bi bi-arrow-up-right ms-2" /></Link>
+              <Link className="hero-story-link" to="/about">Why Tide & Table <i className="bi bi-arrow-right ms-2" /></Link>
             </div>
-            <div>
-              <b>One network for every source</b>
-              <small>Fair pricing · Traceable supply · Fresher delivery</small>
+            <div className="hero-proof">
+              <span><i className="bi bi-patch-check" /> Fisher direct</span>
+              <span><i className="bi bi-snow2" /> Cold-chain fresh</span>
+              <span><i className="bi bi-geo-alt" /> Traceable catch</span>
             </div>
           </div>
-        </div>
-        <div className="hero-visual reveal">
-          <div className="hero-image">
-            <img
-              src="https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&w=1400&q=90"
-              alt="Fresh fish displayed at a seafood market"
-            />
-            <div className="hero-photo-shade" />
-            <div className="floating-tag tag-top">
-              <span className="pulse" /> FRESHNESS TRACKING
-            </div>
-            <div className="floating-tag tag-bottom">
-              <div className="cold-icon">
-                <Snowflake size={17} />
-              </div>
-              <div>
-                <b>Cold-chain coordination</b>
-                <small>Pickup to delivery visibility</small>
-              </div>
-              <CheckCircle2 size={18} color="#14a58d" />
-            </div>
-          </div>
-          <div className="hero-stamp">
-            <Waves size={24} />
-            <b>
-              FROM SOURCE
-              <br />
-              TO MARKET
-            </b>
+          <div className="hero-note">
+            <span className="note-icon"><i className="bi bi-water" /></span>
+            <div><strong>Today’s catch,</strong><br />handled with care.</div>
           </div>
         </div>
-        <div className="hero-bottom">
-          <span>BUILT FOR THE COMPLETE FISHERIES VALUE CHAIN</span>
-          <div>
-            <i /> TRANSPARENT TRADE <i /> QUALITY FOCUS <i /> RESPONSIBLE
-            SOURCING
-          </div>
-        </div>
+        <div className="hero-vertical-label">A MORE THOUGHTFUL SEAFOOD MARKET</div>
       </section>
 
       <section className="trust-strip">
-        <div>
-          <b>One connected ecosystem</b>
-          <span>
-            Purpose-built for every link in the fisheries value chain.
-          </span>
-        </div>
-        <strong>
-          <Fish /> FARMERS
-        </strong>
-        <strong>
-          <Waves /> HATCHERIES
-        </strong>
-        <strong>
-          <PackageCheck /> INVENTORY
-        </strong>
-        <strong>
-          <Truck /> LOGISTICS
-        </strong>
-      </section>
-
-      <section className="section intro-section" id="about" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=1600&q=85)", backgroundSize: "cover", backgroundPosition: "center" }}>
-        <div className="section-kicker">A BETTER WAY TO TRADE</div>
-        <div className="intro-grid reveal">
-          <h2>
-            Good fish deserves
-            <br />
-            <span>a better journey.</span>
-          </h2>
-          <div>
-            <p>
-              Our platform digitises the fisheries supply chain to connect
-              producers directly with organised buyers. Suppliers can publish
-              availability and negotiate transparently, while inventory teams
-              coordinate quality, freshness and movement.
-            </p>
-            <a href="#services">
-              Discover the platform <ArrowUpRight size={16} />
-            </a>
-          </div>
-        </div>
-        <div className="benefit-grid">
-          <article className="reveal">
-            <div className="benefit-icon">
-              <TrendingUp />
-            </div>
-            <h3>Fair price discovery</h3>
-            <p>
-              Compare supplier expectations, offers and counteroffers in one
-              transparent negotiation trail.
-            </p>
-          </article>
-          <article className="reveal">
-            <div className="benefit-icon">
-              <Snowflake />
-            </div>
-            <h3>Freshness-first handling</h3>
-            <p>
-              Every lot records harvest timing and freshness duration, helping
-              teams spot urgent and expired stock.
-            </p>
-          </article>
-          <article className="reveal">
-            <div className="benefit-icon">
-              <Truck />
-            </div>
-            <h3>Coordinated logistics</h3>
-            <p>
-              Assign delivery personnel, plan pickups and follow transport
-              milestones through delivery.
-            </p>
-          </article>
-          <article className="reveal">
-            <div className="benefit-icon">
-              <ShieldCheck />
-            </div>
-            <h3>Trusted supply network</h3>
-            <p>
-              Keep supplier profiles, listing details, deal decisions and
-              operational updates together.
-            </p>
-          </article>
+        <div className="container-xl trust-items">
+          <div><i className="bi bi-compass" /><span><strong>Know your source</strong><small>Coast to kitchen traceability</small></span></div>
+          <div><i className="bi bi-snow2" /><span><strong>Kept perfectly cold</strong><small>Freshness, all the way home</small></span></div>
+          <div><i className="bi bi-cash-coin" /><span><strong>Fair from the start</strong><small>Better returns for fishers</small></span></div>
+          <div><i className="bi bi-truck" /><span><strong>At your door, fast</strong><small>Carefully packed & delivered</small></span></div>
         </div>
       </section>
 
-      <section className="fish-showcase" id="categories" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1574781330855-d0db8cc6a79c?auto=format&fit=crop&w=1600&q=85)", backgroundSize: "cover", backgroundPosition: "center" }}>
-        <div className="section">
-          <div className="section-kicker">EXPLORE FISH CATEGORIES</div>
-          <div className="section-heading">
-            <div>
-              <h2>
-                Know the catch.
-                <br />
-                <span>Plan the supply.</span>
-              </h2>
-            </div>
-            <p>
-              Discover common freshwater and aquaculture species. Actual
-              availability, grade and quantity are provided by suppliers in each
-              listing.
-            </p>
-          </div>
-          <div className="fish-grid">
-            {fishCatalog.map((fish, index) => (
-              <article className="fish-card reveal" key={fish.name}>
-                <div className="fish-card-image">
-                  <img
-                    src={fish.image}
-                    alt={`${fish.name} fish`}
-                    loading="lazy"
-                  />
-                  <span>0{index + 1}</span>
-                </div>
-                <div className="fish-card-body">
-                  <div className="fish-type">{fish.type}</div>
-                  <h3>{fish.name}</h3>
-                  <i>{fish.scientific}</i>
-                  <p>{fish.detail}</p>
-                  <div className="fish-tags">
-                    {fish.tags.map((tag) => (
-                      <span key={tag}>{tag}</span>
-                    ))}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-          <p className="catalog-note">
-            <Droplets size={15} /> Species shown are illustrative catalogue
-            examples. Freshness, grade and supply depend on each submitted lot.
-          </p>
+      <section className="section-space container-xl">
+        <SectionHeading eyebrow="A GOOD PLACE TO START" title="Find your kind of fresh" description="A little something for every table, thoughtfully sourced." link="/categories" linkLabel="All categories" />
+        <div className="category-grid">
+          {categories.map((category, index) => (
+            <Link className={`category-card category-card-${index + 1}`} to="/categories" key={category.slug}>
+              <img src={category.image} alt="" loading="lazy" />
+              <div className="category-overlay"><span>{category.count}</span><h3>{category.name}</h3><i className="bi bi-arrow-up-right" /></div>
+            </Link>
+          ))}
         </div>
       </section>
 
-      <section className="section workflow-section" id="how" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1524704654690-b56c05c78a00?auto=format&fit=crop&w=1600&q=85)", backgroundSize: "cover", backgroundPosition: "center" }}>
-        <div className="section-kicker">HOW AQUATRADE WORKS</div>
-        <div className="section-heading">
-          <h2>
-            From supplier listing
-            <br />
-            to doorstep delivery.
-          </h2>
-          <p>
-            A clear, trackable workflow that keeps suppliers, inventory teams
-            and delivery partners aligned.
-          </p>
-        </div>
-        <div className="workflow-layout">
-          <div className="workflow-photo reveal">
-            <img
-              src="https://images.unsplash.com/photo-1574781330855-d0db8cc6a79c?auto=format&fit=crop&w=1200&q=85"
-              alt="Fishing boats and fishery activity on the water"
-              loading="lazy"
-            />
-            <div className="workflow-photo-caption">
-              <Waves />
-              <span>
-                <b>Source to market</b>
-                <small>One coordinated journey</small>
-              </span>
-            </div>
-          </div>
-          <div className="steps-grid">
-            {steps.map(([n, title, desc, Icon]) => (
-              <article className="reveal" key={n}>
-                <div className="step-icon">
-                  <Icon size={19} />
-                </div>
-                <div>
-                  <b>{n}</b>
-                  <h3>{title}</h3>
-                  <p>{desc}</p>
-                </div>
-              </article>
-            ))}
-          </div>
+      <section className="section-space featured-section">
+        <div className="container-xl">
+          <SectionHeading eyebrow="LOVED BY OUR COMMUNITY" title="The good catches" description="Customer favourites, chosen fresh from the coast." link="/shop" />
+          <ProductGrid products={bestSellers} />
         </div>
       </section>
 
-      <section className="freshness-section" id="services" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1535399831218-d5bd36d1a6b3?auto=format&fit=crop&w=1600&q=85)", backgroundSize: "cover", backgroundPosition: "center" }}>
-        <div className="freshness-inner">
-          <div className="freshness-copy reveal">
-            <div className="section-kicker">FRESHNESS IS A PRIORITY</div>
-            <h2>
-              Time matters.
-              <br />
-              <span>Every hour counts.</span>
-            </h2>
-            <p>
-              Fish lots are time-sensitive. AquaTrade makes freshness duration a
-              required part of the listing so inventory teams can prioritise
-              stock and plan pickup before quality windows close.
-            </p>
-            <div className="freshness-points">
-              <div>
-                <Clock3 />
-                <span>
-                  <b>Fresh</b>
-                  <small>Within the supplier's freshness window</small>
-                </span>
-              </div>
-              <div>
-                <ThermometerSnowflake />
-                <span>
-                  <b>Nearing expiry</b>
-                  <small>Needs priority review and movement</small>
-                </span>
-              </div>
-              <div>
-                <BadgeCheck />
-                <span>
-                  <b>Expired</b>
-                  <small>Flagged for review, not normal sale</small>
-                </span>
-              </div>
-            </div>
+      <section className="story-banner">
+        <div className="container-xl story-banner-inner">
+          <div className="story-banner-copy">
+            <span className="eyebrow eyebrow-light">A BETTER KIND OF SEAFOOD MARKET</span>
+            <h2>Good for your table.<br /><em>Better for the coast.</em></h2>
+            <p>We bring fishers and families closer. That means fairer prices at the shore, fresher fish at home, and a supply chain you can feel good about.</p>
+            <Link className="btn btn-outline-light" to="/about">Meet our way of doing things <i className="bi bi-arrow-up-right ms-2" /></Link>
           </div>
-          <div className="freshness-visual reveal">
-            <img
-              src="https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=1100&q=85"
-              alt="Fresh seafood arranged on ice"
-              loading="lazy"
-            />
-            <div className="freshness-card">
-              <Snowflake />
-              <div>
-                <b>Freshness-led inventory</b>
-                <small>Harvest date + duration + status</small>
-              </div>
-            </div>
-          </div>
+          <div className="story-stats"><div><strong>100%</strong><span>source traceable</span></div><div><strong>24 hr</strong><span>coast to kitchen</span></div><div><strong>0</strong><span>middlemen in the way</span></div></div>
         </div>
       </section>
 
-      <section className="marketplace-band" style={{ backgroundImage: "url(https://images.unsplash.com/photo-1510130387422-82bed34b37e9?auto=format&fit=crop&w=1600&q=85)", backgroundSize: "cover", backgroundPosition: "center" }}>
-        <div className="section marketplace-inner">
-          <div className="section-kicker">BUILT FOR EVERY ROLE</div>
-          <h2>
-            One marketplace.
-            <br />
-            <span>Many ways to contribute.</span>
-          </h2>
-          <div className="role-chips">
-            <span>Fish farmers</span>
-            <span>Hatchery farmers</span>
-            <span>Dam farmers</span>
-            <span>River contractors</span>
-            <span>Inventory managers</span>
-            <span>Delivery personnel</span>
-            <span>Administrators</span>
-          </div>
+      <section className="section-space container-xl">
+        <SectionHeading eyebrow="JUST IN FROM THE COAST" title="Fresh off the boat" description="Small-batch, seasonal, and here for a good time—not a long time." link="/shop" linkLabel="See what's new" />
+        <ProductGrid products={freshCatch} />
+      </section>
+
+      <section className="offer-section">
+        <div className="offer-image" />
+        <div className="container-xl offer-content">
+          <span className="eyebrow">A LITTLE SOMETHING TO GET STARTED</span>
+          <h2>Make room<br />for <em>something</em> good.</h2>
+          <p>Discover fresh catch, good people, and a more thoughtful route from coast to kitchen.</p>
+          <Link className="btn btn-dark-green" to="/contact">Ask about today's catch <i className="bi bi-arrow-up-right ms-2" /></Link>
         </div>
       </section>
 
-      <section className="cta-band" >
-        <div>
-          <span>YOUR MARKETPLACE. YOUR MOMENTUM.</span>
-          <h2>Make every catch count.</h2>
-          <p>
-            Join a smarter fisheries network built for transparent trade and
-            coordinated delivery.
-          </p>
+      <section className="testimonial-section section-space">
+        <div className="container-xl testimonial-inner">
+          <span className="eyebrow">KIND WORDS, FRESH FROM OUR CUSTOMERS</span>
+          <div className="testimonial-stars" aria-label="5 out of 5 stars">★★★★★</div>
+          <blockquote>“The pomfret was so fresh it reminded me of fish my dad used to bring home from the coast. I love knowing exactly where it came from.”</blockquote>
+          <div className="testimonial-author"><span className="avatar">AM</span><span><strong>Ananya M.</strong><small>Home cook in Bengaluru</small></span></div>
+          <div className="testimonial-pagination"><span className="active" /><span /><span /></div>
         </div>
-        <button onClick={onRegister}>
-          Become a partner <ArrowRight size={17} />
-        </button>
       </section>
-      <div id="contact">
-        <Footer />
-      </div>
-    </div>
+    </>
   );
 }
+
+export default Home;

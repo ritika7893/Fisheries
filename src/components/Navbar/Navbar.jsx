@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Fish, Menu, ArrowUpRight, X } from "lucide-react";
 import "./Navbar.css";
+import { NavLink } from "react-router-dom";
 export default function Navbar({ onLogin, onRegister }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -15,12 +16,11 @@ export default function Navbar({ onLogin, onRegister }) {
         </span>
       </a>
       <nav className={isOpen ? "open" : ""}>
-        <a href="#home">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#how">How It Works</a>
-        <a href="#categories">Fish Categories</a>
-        <a href="#services">Our Services</a>
-        <a href="#contact">Contact Us</a>
+        <NavLink className="nav-link" to="/">Home</NavLink>
+        <NavLink className="nav-link" to="/shop">Shop all</NavLink>
+        <NavLink className="nav-link" to="/categories">Categories</NavLink>
+        <NavLink className="nav-link" to="/about">Our story</NavLink>
+        <NavLink className="nav-link" to="/contact">Contact</NavLink>
       </nav>
       <div className={`nav-actions ${isOpen ? "open" : ""}`}>
         <button className="nav-login" onClick={onLogin}>

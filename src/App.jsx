@@ -19,6 +19,10 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "./styles/global.css";
 
 import Home from "./pages/Home";
+import Shop from "./pages/Shop";
+import Categories from "./pages/Categories";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Navbar from "./components/Navbar/Navbar";
 import Modal from "./components/Modal/Modal";
@@ -91,6 +95,10 @@ function AppContent() {
       {!isDashboard && <Navbar onLogin={openLogin} onRegister={openRegister} />}
       <Routes>
         <Route path="/" element={<Home onLogin={openLogin} onRegister={openRegister} />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route
           path="/app"
           element={

@@ -42,14 +42,18 @@
   display: flex;
   gap: 26px;
 }
-.site-nav nav a {
+.site-nav nav .nav-link {
   text-decoration: none;
   color: #506970;
   font-size: 12px;
   font-weight: 600;
   transition: 0.2s;
+  padding: 0;
 }
-.site-nav nav a:hover {
+.site-nav nav .nav-link:hover {
+  color: #0a9b8b;
+}
+.site-nav nav .nav-link.active {
   color: #0a9b8b;
 }
 .nav-actions {
@@ -85,7 +89,7 @@
   .site-nav nav {
     gap: 13px;
   }
-  .site-nav nav a {
+  .site-nav nav .nav-link {
     font-size: 11px;
   }
 }
