@@ -50,7 +50,7 @@ export const products = [
     reviews: 156,
     badge: "Best seller",
     fresh: true,
-    image: "/src/assets/images/p1.jpeg",
+    image: new URL("../assets/images/p1.jpeg", import.meta.url).href,
     options: [
       { label: "500 g", multiplier: 1 },
       { label: "1 kg", multiplier: 1.9 },
@@ -72,7 +72,7 @@ export const products = [
     reviews: 89,
     badge: "Fresh catch",
     fresh: true,
-    image: "/src/assets/images/p2.jpeg",
+    image: new URL("../assets/images/p2.jpeg", import.meta.url).href,
     options: [
       { label: "500 g", multiplier: 1 },
       { label: "1 kg", multiplier: 1.85 },
@@ -94,7 +94,7 @@ export const products = [
     reviews: 124,
     badge: "Premium",
     fresh: true,
-    image: "/src/assets/images/p3.jpeg",
+    image: new URL("../assets/images/p3.jpeg", import.meta.url).href,
     options: [
       { label: "300 g", multiplier: 1 },
       { label: "500 g", multiplier: 1.7 },
@@ -116,7 +116,7 @@ export const products = [
     reviews: 98,
     badge: "Just landed",
     fresh: true,
-    image: "/src/assets/images/p4.jpeg",
+    image: new URL("../assets/images/p4.jpeg", import.meta.url).href,
     options: [
       { label: "500 g", multiplier: 1 },
       { label: "1 kg", multiplier: 1.85 },
@@ -138,7 +138,7 @@ export const products = [
     reviews: 67,
     badge: "Seasonal",
     fresh: true,
-    image: "/src/assets/images/p5.jpeg",
+    image: new URL("../assets/images/p5.jpeg", import.meta.url).href,
     options: [
       { label: "300 g", multiplier: 1 },
       { label: "500 g", multiplier: 1.75 },
@@ -160,7 +160,7 @@ export const products = [
     reviews: 82,
     badge: "Popular",
     fresh: true,
-    image: "/src/assets/images/p6.jpeg",
+    image: new URL("../assets/images/p6.jpeg", import.meta.url).href,
     options: [
       { label: "300 g", multiplier: 1 },
       { label: "500 g", multiplier: 1.7 },
@@ -182,7 +182,7 @@ export const products = [
     reviews: 91,
     badge: "Fresh pick",
     fresh: true,
-    image: "/src/assets/images/p7.jpeg",
+    image: new URL("../assets/images/p7.jpeg", import.meta.url).href,
     options: [
       { label: "500 g", multiplier: 1 },
       { label: "1 kg", multiplier: 1.85 },
@@ -204,7 +204,7 @@ export const products = [
     reviews: 110,
     badge: "Premium",
     fresh: true,
-    image: "/src/assets/images/p8.jpeg",
+    image: new URL("../assets/images/p8.jpeg", import.meta.url).href,
     options: [
       { label: "300 g", multiplier: 1 },
       { label: "500 g", multiplier: 1.7 },
@@ -226,7 +226,7 @@ export const products = [
     reviews: 76,
     badge: "Fresh catch",
     fresh: true,
-    image: "/src/assets/images/p3.jpeg",
+    image: new URL("../assets/images/p3.jpeg", import.meta.url).href,
     options: [
       { label: "300 g", multiplier: 1 },
       { label: "500 g", multiplier: 1.7 },
@@ -248,7 +248,7 @@ export const products = [
     reviews: 59,
     badge: "Seasonal",
     fresh: true,
-    image: "/src/assets/images/p5.jpeg",
+    image: new URL("../assets/images/p5.jpeg", import.meta.url).href,
     options: [
       { label: "300 g", multiplier: 1 },
       { label: "500 g", multiplier: 1.75 },

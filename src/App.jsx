@@ -200,7 +200,7 @@ function AppContent() {
 
 function App() {
   return (
-    <Router basename="/">
+    <Router basename="/fisheriesukportal">
       <AppContent />
     </Router>
   );

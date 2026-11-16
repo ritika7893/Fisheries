@@ -9,19 +9,19 @@ const bestSellers = products.slice(0, 4);
 const freshCatch = products.filter((product) => product.fresh).slice(1, 5);
 const heroSlides = [
   {
-    image: "/src/assets/images/p10.jpeg",
+    image: new URL("../assets/images/p10.jpeg", import.meta.url).href,
     alt: "Fresh coastal seafood catch",
     noteTitle: "Today’s catch,",
     noteText: "handled with care.",
   },
   {
-    image: "/src/assets/images/p38.jpeg",
+    image: new URL("../assets/images/p38.jpeg", import.meta.url).href,
     alt: "Premium fish prepared for delivery",
     noteTitle: "Fisher direct,",
     noteText: "from coast to kitchen.",
   },
   {
-    image: "/src/assets/images/p14.jpeg",
+    image: new URL("../assets/images/p14.jpeg", import.meta.url).href,
     alt: "Cold-chain fresh seafood selection",
     noteTitle: "Cold-chain fresh,",
     noteText: "delivered with care.",
@@ -138,7 +138,7 @@ function Home() {
 
       <section className="offer-section">
         <div className="offer-image">
-          <img src="/src/assets/images/p3.jpeg" alt="Rainbow Trout from Himachal Pradesh" loading="lazy" />
+          <img src={new URL("../assets/images/p3.jpeg", import.meta.url).href} alt="Rainbow Trout from Himachal Pradesh" loading="lazy" />
         </div>
         <div className="container-xl offer-content">
           <span className="eyebrow">A LITTLE SOMETHING TO GET STARTED</span>
