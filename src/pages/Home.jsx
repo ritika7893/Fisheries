@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { categories, products } from "../data/Products.js";
 import ProductGrid from "../components/ProductGrid.jsx";
@@ -6,12 +7,50 @@ import "../pages/home.css";
 
 const bestSellers = products.slice(0, 4);
 const freshCatch = products.filter((product) => product.fresh).slice(1, 5);
+const heroSlides = [
+  {
+    image: "/src/assets/images/p10.jpeg",
+    alt: "Fresh coastal seafood catch",
+    noteTitle: "Today’s catch,",
+    noteText: "handled with care.",
+  },
+  {
+    image: "/src/assets/images/p7.jpeg",
+    alt: "Premium fish prepared for delivery",
+    noteTitle: "Fisher direct,",
+    noteText: "from coast to kitchen.",
+  },
+  {
+    image: "/src/assets/images/p14.jpeg",
+    alt: "Cold-chain fresh seafood selection",
+    noteTitle: "Cold-chain fresh,",
+    noteText: "delivered with care.",
+  },
+];
 
 function Home() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide((current) => (current + 1) % heroSlides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <>
       <section className="hero-section">
-        <div className="hero-image" />
+        <div className="hero-slides" aria-hidden="true">
+          {heroSlides.map((slide, index) => (
+            <div
+              key={slide.image}
+              className={`hero-slide ${index === activeSlide ? "is-active" : ""}`}
+            >
+              <img src={slide.image} alt="" loading={index === 0 ? "eager" : "lazy"} />
+            </div>
+          ))}
+        </div>
         <div className="container-xl hero-content">
           <div className="hero-copy">
             <span className="hero-kicker"><span /> FROM THE COAST, WITH CARE</span>
@@ -26,10 +65,26 @@ function Home() {
               <span><i className="bi bi-snow2" /> Cold-chain fresh</span>
               <span><i className="bi bi-geo-alt" /> Traceable catch</span>
             </div>
+            <div className="hero-dots" role="tablist" aria-label="Hero slides">
+              {heroSlides.map((slide, index) => (
+                <button
+                  key={slide.image}
+                  type="button"
+                  className={`hero-dot ${index === activeSlide ? "active" : ""}`}
+                  onClick={() => setActiveSlide(index)}
+                  aria-label={`Show slide ${index + 1}`}
+                  aria-selected={index === activeSlide}
+                />
+              ))}
+            </div>
           </div>
-          <div className="hero-note">
+          <div className="hero-note" aria-live="polite">
             <span className="note-icon"><i className="bi bi-water" /></span>
-            <div><strong>Today’s catch,</strong><br />handled with care.</div>
+            <div>
+              <strong>{heroSlides[activeSlide].noteTitle}</strong>
+              <br />
+              {heroSlides[activeSlide].noteText}
+            </div>
           </div>
         </div>
         <div className="hero-vertical-label">A MORE THOUGHTFUL SEAFOOD MARKET</div>
@@ -65,6 +120,7 @@ function Home() {
 
       <section className="story-banner">
         <div className="container-xl story-banner-inner">
+         
           <div className="story-banner-copy">
             <span className="eyebrow eyebrow-light">A BETTER KIND OF SEAFOOD MARKET</span>
             <h2>Good for your table.<br /><em>Better for the coast.</em></h2>
@@ -81,7 +137,9 @@ function Home() {
       </section>
 
       <section className="offer-section">
-        <div className="offer-image" />
+        <div className="offer-image">
+          <img src="/src/assets/images/p3.jpeg" alt="Rainbow Trout from Himachal Pradesh" loading="lazy" />
+        </div>
         <div className="container-xl offer-content">
           <span className="eyebrow">A LITTLE SOMETHING TO GET STARTED</span>
           <h2>Make room<br />for <em>something</em> good.</h2>
