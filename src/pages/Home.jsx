@@ -15,7 +15,7 @@ const heroSlides = [
     noteText: "handled with care.",
   },
   {
-    image: "/src/assets/images/p7.jpeg",
+    image: "/src/assets/images/p38.jpeg",
     alt: "Premium fish prepared for delivery",
     noteTitle: "Fisher direct,",
     noteText: "from coast to kitchen.",
